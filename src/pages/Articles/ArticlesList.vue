@@ -36,7 +36,41 @@
           :data="articles"
           :columns="columns"
           row-key="name"
-        />
+        >
+          <template v-slot:body-cell-actions="props">
+            <q-td :props="props">
+              <q-btn
+                size="sm"
+                round
+                dense
+                color="primary"
+                icon="edit"
+                @click.stop="
+                  () => openNewArticleModal(props.row.id, 'AddArticle', 'edit')
+                "
+                class="q-mr-xs"
+              />
+              <q-btn
+                size="sm"
+                round
+                dense
+                color="secondary"
+                icon="delete"
+                @click.stop="
+                  () =>
+                    openNewArticleModal(
+                      props.row.id,
+                      'article',
+                      'delete',
+                      props.row,
+                      props.row.name
+                    )
+                "
+                class="q-mr-sm"
+              />
+            </q-td>
+          </template>
+        </q-table>
       </q-card-section>
     </q-card>
   </q-page>
@@ -94,6 +128,11 @@ export default {
           label: "Unità di Misura",
           type: "string",
           field: article => article.measure.code
+        },
+        {
+          name: "actions",
+          label: "Azioni",
+          type: "actions"
         }
       ],
       articles: []
@@ -113,6 +152,14 @@ export default {
     },
     updateList(newArticle) {
       this.articles.splice(this.articles.length, 0, newArticle);
+    },
+    removeArticleFromList(articleId) {
+      const idx = this.articles.findIndex(el => el.id === articleId);
+      this.articles.splice(idx, 1);
+    },
+    updateArticle(articleToUpdate) {
+      const idx = this.articles.findIndex(el => el.id === articleToUpdate.id);
+      this.articles.splice(idx, 1, articleToUpdate);
     }
   },
   created: function() {
@@ -121,9 +168,13 @@ export default {
     });
 
     eventBus.$on("items-changed", this.updateList);
+    eventBus.$on("item-delete", this.removeArticleFromList);
+    eventBus.$on("items-update", this.updateArticle);
   },
   beforeDestroy: function() {
     eventBus.$off("items-changed", this.updateList);
+    eventBus.$off("item-delete", this.removeArticleFromList);
+    eventBus.$off("items-update", this.updateArticle);
   }
 };
 </script>
