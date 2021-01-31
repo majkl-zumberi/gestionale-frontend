@@ -54,7 +54,7 @@ const linksData = [
     title: 'Articoli',
     caption: 'Gestione Articoli',
     icon: 'article',
-    link: 'https://quasar.dev'
+    link: '/#/articles'
   },
   {
     title: 'Clienti',
