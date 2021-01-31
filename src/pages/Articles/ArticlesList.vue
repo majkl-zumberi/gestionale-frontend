@@ -19,12 +19,12 @@ name: "articlesList",
   return {
     columns:[
       {name:"name", label:"Nome", type:"string", field: article => article.name},
-      {name:"category", label:"Categoria", type:"string"},
-      {name:"urlimg", label: "Immagine", type:"string"},
-      {name:"price", label:"Prezzo", type:"string"},
-      {name:"expiry", label:"Scadenza", type:"string"},
-      {name:"available", label:"Disponibilità", type:"string"},
-      {name:"measureId", label:"Unità di Misura", type:"string"},
+      {name:"category", label:"Categoria", type:"string", field: article => article.category},
+      {name:"urlimg", label: "Immagine", type:"string", field: article => article.urlimg},
+      {name:"price", label:"Prezzo", type:"string", field: article => article.price},
+      {name:"expiry", label:"Scadenza", type:"string", field: article => article.expiry},
+      {name:"available", label:"Disponibilità", type:"string", field: article => article.available},
+      {name:"measureId", label:"Unità di Misura", type:"string", field: article => article.measureId},
     ],
     articles:[]
   }
