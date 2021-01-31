@@ -19,7 +19,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-      
+
       'i18n',
       'axios',
     ],
@@ -100,7 +100,18 @@ cfg.module.rules.push({
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Dialog',
+        'Notify'
+      ],
+      config: {
+        notify: {
+          /* Notify defaults */
+          position: 'top-right',
+          color: 'green',
+          timeout: 2000
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations
