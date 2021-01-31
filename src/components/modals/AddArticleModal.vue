@@ -137,7 +137,7 @@
         @click="onCancelClick"
         icon="close"
       />
-      <q-btn color="primary" label="Salva" @click="addArticle" icon="save" />
+      <q-btn color="primary" label="Salva" @click="upsertArticle" icon="save" />
     </q-card-actions>
   </q-card>
 </template>
@@ -168,23 +168,44 @@ export default {
     onCancelClick() {
       this.hide();
     },
-    async addArticle() {
-      try {
-        const {
-          data
-        } = await axios.post(
-          `http://localhost:3000/article/${this.article.measure}`,
-          { ...this.article }
-        );
-        Notify.create("articolo aggiunto");
-        eventBus.$emit("items-changed", data);
-        this.hide();
-      } catch (e) {
-        Notify.create({
-          color: "negative",
-          message: e,
-          icon: "report_problem"
-        });
+    async upsertArticle() {
+      if (this.id) {
+        //edit mode
+        try {
+          const { data } = await axios.put(
+            `http://localhost:3000/article/${this.id}`,
+            {
+              ...this.article
+            }
+          );
+          Notify.create("articolo modificato!");
+          eventBus.$emit("items-update", data);
+          this.hide();
+        } catch (e) {
+          Notify.create({
+            color: "negative",
+            message: e,
+            icon: "report_problem"
+          });
+        }
+      } else {
+        try {
+          const {
+            data
+          } = await axios.post(
+            `http://localhost:3000/article/${this.article.measure}`,
+            { ...this.article }
+          );
+          Notify.create("articolo aggiunto");
+          eventBus.$emit("items-changed", data);
+          this.hide();
+        } catch (e) {
+          Notify.create({
+            color: "negative",
+            message: e,
+            icon: "report_problem"
+          });
+        }
       }
     }
   },
@@ -196,6 +217,16 @@ export default {
       description: description
     }));
     this.measureOptions = mapped;
+
+    if (this.id) {
+      // edit mode
+      // fill current modal
+      const { data } = await axios.get(
+        `http://localhost:3000/article/${this.id}`
+      );
+      console.log({ data });
+      this.article = { ...data, measure: data.measure.id };
+    }
   }
 };
 </script>
