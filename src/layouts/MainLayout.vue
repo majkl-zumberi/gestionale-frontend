@@ -26,10 +26,7 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header class="text-grey-8">
           Dashboard
         </q-item-label>
         <EssentialLink
@@ -47,49 +44,49 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import EssentialLink from "components/EssentialLink.vue";
 
 const linksData = [
   {
-    title: 'Articoli',
-    caption: 'Gestione Articoli',
-    icon: 'article',
-    link: '/#/articles'
+    title: "Articoli",
+    caption: "Gestione Articoli",
+    icon: "article",
+    link: "/#/articles"
   },
   {
-    title: 'Clienti',
-    caption: 'Gestione Clienti',
-    icon: 'face',
-    link: 'https://github.com/quasarframework'
+    title: "Clienti",
+    caption: "Gestione Clienti",
+    icon: "face",
+    link: "https://github.com/quasarframework"
   },
   {
-    title: 'Fatture',
-    caption: 'Gestione Fatture',
-    icon: 'receipt_long',
-    link: 'https://chat.quasar.dev'
+    title: "Fatture",
+    caption: "Gestione Fatture",
+    icon: "receipt_long",
+    link: "https://chat.quasar.dev"
   },
   {
-    title: 'Ordini',
-    caption: 'Gestione Ordini',
-    icon: 'unarchive',
-    link: 'https://forum.quasar.dev'
+    title: "Ordini",
+    caption: "Gestione Ordini",
+    icon: "unarchive",
+    link: "https://forum.quasar.dev"
   },
   {
-    title: 'Measure Unit',
-    caption: 'Gestione Unità di Misura',
-    icon: 'straighten',
-    link: 'https://twitter.quasar.dev'
+    title: "Measure Unit",
+    caption: "Gestione Unità di Misura",
+    icon: "straighten",
+    link: "/#/measures"
   }
 ];
 
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
   components: { EssentialLink },
-  data () {
+  data() {
     return {
       leftDrawerOpen: false,
       essentialLinks: linksData
-    }
+    };
   }
-}
+};
 </script>
