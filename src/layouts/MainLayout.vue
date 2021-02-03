@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Gestionale 2.0
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Copyright reserved</div>
       </q-toolbar>
     </q-header>
 
