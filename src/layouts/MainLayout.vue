@@ -57,7 +57,7 @@ const linksData = [
     title: "Clienti",
     caption: "Gestione Clienti",
     icon: "face",
-    link: "https://github.com/quasarframework"
+    link: "/#/customers"
   },
   {
     title: "Fatture",
@@ -72,10 +72,16 @@ const linksData = [
     link: "https://forum.quasar.dev"
   },
   {
-    title: "Measure Unit",
+    title: "Unità di misura",
     caption: "Gestione Unità di Misura",
     icon: "straighten",
     link: "/#/measures"
+  },
+  {
+    title: "Categorie",
+    caption: "Gestione categorie",
+    icon: "category",
+    link: "/#/categories"
   }
 ];
 
