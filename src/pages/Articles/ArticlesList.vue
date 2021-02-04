@@ -96,13 +96,7 @@ export default {
           name: "category",
           label: "Categoria",
           type: "string",
-          field: article => article.category
-        },
-        {
-          name: "urlimg",
-          label: "Immagine",
-          type: "string",
-          field: article => article.urlimg
+          field: article => article.category.code
         },
         {
           name: "price",
@@ -112,10 +106,10 @@ export default {
           format: price => `${price}€`
         },
         {
-          name: "expiry",
-          label: "Scadenza",
+          name: "createdAt",
+          label: "Data Creazione",
           type: "string",
-          field: article => article.expiry
+          field: article => article.createdAt
         },
         {
           name: "available",

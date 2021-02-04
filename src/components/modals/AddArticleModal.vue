@@ -29,18 +29,21 @@
               </q-input>
             </div>
             <div class="col">
-              <q-input
-                label="categoria"
+              <q-select
+                label="Categoria"
                 v-model="article.category"
+                :options="categoryOptions"
                 outlined
                 dense
                 clearable
                 clear-icon="close"
+                emit-value
+                map-options
               >
                 <template v-slot:prepend>
                   <q-icon class="icon-margin" name="category" />
                 </template>
-              </q-input>
+              </q-select>
             </div>
           </div>
           <div class="row q-col-gutter-md q-mb-lg">
@@ -60,19 +63,21 @@
               </q-input>
             </div>
             <div class="col">
-              <q-input
-                type="date"
-                hint="Scandenza"
-                v-model="article.expiry"
+              <q-select
+                label="unità di misura"
+                v-model="article.measure"
+                :options="measureOptions"
                 outlined
                 dense
                 clearable
                 clear-icon="close"
+                emit-value
+                map-options
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="fas fa-phone" />
+                  <q-icon class="icon-margin" name="straighten" />
                 </template>
-              </q-input>
+              </q-select>
             </div>
           </div>
           <div class="row q-col-gutter-md q-mb-lg">
@@ -90,40 +95,6 @@
                   <q-icon class="icon-margin" name="inventory_2" />
                 </template>
               </q-input>
-            </div>
-            <div class="col">
-              <q-input
-                type="url"
-                label="Url"
-                v-model="article.urlimg"
-                outlined
-                dense
-                clearable
-                clear-icon="close"
-              >
-                <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="crop_original" />
-                </template>
-              </q-input>
-            </div>
-          </div>
-          <div class="row q-col-gutter-md q-mb-lg">
-            <div class="col">
-              <q-select
-                label="unità di misura"
-                v-model="article.measure"
-                :options="measureOptions"
-                outlined
-                dense
-                clearable
-                clear-icon="close"
-                emit-value
-                map-options
-              >
-                <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="straighten" />
-                </template>
-              </q-select>
             </div>
           </div>
         </q-tab-panel>
@@ -153,13 +124,12 @@ export default {
     return {
       activeTab: "anagrafica",
       measureOptions: [],
+      categoryOptions: [],
       article: {
         name: "",
         category: "",
         price: "",
-        expiry: "",
         available: "",
-        urlimg: "",
         measure: ""
       }
     };
@@ -193,7 +163,7 @@ export default {
           const {
             data
           } = await axios.post(
-            `http://localhost:3000/article/${this.article.measure}`,
+            `http://localhost:3000/article/${this.article.measure}/${this.article.category}`,
             { ...this.article }
           );
           Notify.create("articolo aggiunto");
@@ -218,6 +188,13 @@ export default {
     }));
     this.measureOptions = mapped;
 
+    const { data:categoryData } = await axios.get("http://localhost:3000/category");
+    const categoryMapped = categoryData.map(({ id, code, description }) => ({
+      label: code,
+      value: id,
+      description: description
+    }));
+    this.categoryOptions = categoryMapped;
     if (this.id) {
       // edit mode
       // fill current modal
@@ -225,7 +202,7 @@ export default {
         `http://localhost:3000/article/${this.id}`
       );
       console.log({ data });
-      this.article = { ...data, measure: data.measure.id };
+      this.article = { ...data, measure: data.measure.id, category: data.category.id };
     }
   }
 };
