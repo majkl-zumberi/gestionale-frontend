@@ -80,6 +80,7 @@
 import axios from "axios";
 import crudModal from "../../components/modals/CrudModal";
 import eventBus from "../../utils/eventBus";
+import { date } from "quasar";
 export default {
   name: "articlesList",
   components: {},
@@ -109,7 +110,7 @@ export default {
           name: "createdAt",
           label: "Data Creazione",
           type: "string",
-          field: article => article.createdAt
+          field: article => date.formatDate(article.createdAt, "DD-MM-YYYY")
         },
         {
           name: "available",
