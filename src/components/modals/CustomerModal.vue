@@ -24,7 +24,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="article" />
+                  <q-icon class="icon-margin" name="vpn_key" />
                 </template>
               </q-input>
             </div>
@@ -38,7 +38,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="category" />
+                  <q-icon class="icon-margin" name="work" />
                 </template>
               </q-input>
             </div>
@@ -55,7 +55,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="price_check" />
+                  <q-icon class="icon-margin" name="email" />
                 </template>
               </q-input>
             </div>
@@ -69,7 +69,10 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="straighten" />
+                  <q-icon
+                    class="icon-margin"
+                    name="drive_file_rename_outline"
+                  />
                 </template>
               </q-input>
             </div>
@@ -85,7 +88,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="inventory_2" />
+                  <q-icon class="icon-margin" name="apartment" />
                 </template>
               </q-input>
             </div>
@@ -99,7 +102,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="straighten" />
+                  <q-icon class="icon-margin" name="home" />
                 </template>
               </q-input>
             </div>
@@ -115,7 +118,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="straighten" />
+                  <q-icon class="icon-margin" name="import_contacts" />
                 </template>
               </q-input>
             </div>
@@ -129,7 +132,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="straighten" />
+                  <q-icon class="icon-margin" name="place" />
                 </template>
               </q-input>
             </div>
@@ -143,7 +146,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="straighten" />
+                  <q-icon class="icon-margin" name="call" />
                 </template>
               </q-input>
             </div>
