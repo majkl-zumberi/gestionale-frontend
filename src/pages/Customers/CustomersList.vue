@@ -33,8 +33,41 @@
           title="Clienti"
           :data="customers"
           :columns="columns"
+          :filter="filter"
+          :visible-columns="visibleColumns"
           row-key="name"
         >
+          <q-space />
+
+          <template v-slot:top-right>
+            <q-select
+              v-model="visibleColumns"
+              multiple
+              outlined
+              dense
+              options-dense
+              :display-value="'Filtra colonne'"
+              emit-value
+              map-options
+              :options="columns"
+              option-value="name"
+              options-cover
+              style="min-width: 150px;margin-right:1.5em"
+            />
+
+            <q-input
+              rounded
+              filled
+              dense
+              debounce="300"
+              v-model="filter"
+              placeholder="Cerca"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </template>
           <template v-slot:body-cell-actions="props">
             <q-td :props="props">
               <q-btn
@@ -144,7 +177,20 @@ export default {
           type: "actions"
         }
       ],
-      customers: []
+      customers: [],
+      visibleColumns: [
+        "ccode",
+        "businessName",
+        "email",
+        "piva",
+        "city",
+        "address",
+        "cap",
+        "state",
+        "phonenr",
+        "actions"
+      ],
+      filter: ""
     };
   },
   methods: {
