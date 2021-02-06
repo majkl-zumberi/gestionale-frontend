@@ -3,10 +3,12 @@ import CategoryModal from "./CategoryModal";
 import CustomerModal from "./CustomerModal";
 import DeleteModal from "./DeleteModal";
 import MeasureModal from "./MeasureModal";
+import OrderModal from "./OrderModal";
 export default{
   AddArticleModal,
   DeleteModal,
   MeasureModal,
   CategoryModal,
-  CustomerModal
+  CustomerModal,
+  OrderModal
 }
