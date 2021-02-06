@@ -35,8 +35,23 @@
           title="Articoli"
           :data="articles"
           :columns="columns"
+          :filter="filter"
           row-key="name"
         >
+          <template v-slot:top-right>
+            <q-input
+              rounded
+              filled
+              dense
+              debounce="300"
+              v-model="filter"
+              placeholder="Cerca"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </template>
           <template v-slot:body-cell-actions="props">
             <q-td :props="props">
               <q-btn
@@ -130,7 +145,8 @@ export default {
           type: "actions"
         }
       ],
-      articles: []
+      articles: [],
+      filter: ""
     };
   },
   methods: {
