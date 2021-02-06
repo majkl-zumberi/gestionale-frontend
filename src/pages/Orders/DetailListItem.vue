@@ -94,13 +94,14 @@
           <template v-slot:bottom-row>
             <q-tr>
               <q-td colspan="100%">
-                Costo totale Articoli {{ detailOrder.totalOrderPrice }}€
+                Costo totale Articoli
+                {{ detailOrder.totalOrderPrice.toFixed(2) }}€
               </q-td>
             </q-tr>
             <q-tr>
               <q-td colspan="100%">
                 Costo totale Articoli + IVA
-                {{ detailOrder.totalOrderPriceIva }}€
+                {{ detailOrder.totalOrderPriceIva.toFixed(2) }}€
               </q-td>
             </q-tr>
           </template>
@@ -172,12 +173,6 @@ export default {
           align: "center",
           field: order => order.totalIva,
           format: price => `${price}€`
-        },
-        {
-          name: "actions",
-          label: "Azioni",
-          type: "actions",
-          align: "center"
         }
       ]
     };
