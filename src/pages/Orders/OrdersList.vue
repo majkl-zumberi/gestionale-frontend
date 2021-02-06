@@ -20,11 +20,9 @@
                 class="q-mr-sm"
                 size="md"
                 color="white"
-                @click="
-                  () => openNewArticleModal(undefined, `AddArticle`, 'add')
-                "
+                @click="() => openNewArticleModal(undefined, `Order`, 'add')"
               />
-              <q-btn color="white" stretch flat label="nuovo articolo" />
+              <q-btn color="white" stretch flat label="nuovo ordine" />
             </q-toolbar-title>
           </q-ribbon>
         </q-toolbar>
@@ -179,15 +177,15 @@ export default {
     },
 
     updateList(newArticle) {
-      this.articles.splice(this.articles.length, 0, newArticle);
+      this.orders.splice(this.orders.length, 0, newArticle);
     },
     removeArticleFromList(articleId) {
-      const idx = this.articles.findIndex(el => el.id === articleId);
-      this.articles.splice(idx, 1);
+      const idx = this.orders.findIndex(el => el.id === articleId);
+      this.orders.splice(idx, 1);
     },
     updateArticle(articleToUpdate) {
-      const idx = this.articles.findIndex(el => el.id === articleToUpdate.id);
-      this.articles.splice(idx, 1, articleToUpdate);
+      const idx = this.orders.findIndex(el => el.id === articleToUpdate.id);
+      this.orders.splice(idx, 1, articleToUpdate);
     }
   },
   created: function() {
