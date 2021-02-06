@@ -63,13 +63,13 @@ const linksData = [
     title: "Fatture",
     caption: "Gestione Fatture",
     icon: "receipt_long",
-    link: "https://chat.quasar.dev"
+    link: ""
   },
   {
     title: "Ordini",
     caption: "Gestione Ordini",
     icon: "unarchive",
-    link: "https://forum.quasar.dev"
+    link: "/#/orders"
   },
   {
     title: "Unità di misura",
