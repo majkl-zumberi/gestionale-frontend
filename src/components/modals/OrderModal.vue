@@ -29,7 +29,7 @@
                 map-options
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="vpn_key" />
+                  <q-icon class="icon-margin" name="face" />
                 </template>
               </q-select>
             </div>
@@ -55,7 +55,7 @@
                 map-options
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="vpn_key" />
+                  <q-icon class="icon-margin" name="article" />
                 </template>
               </q-select>
             </div>
@@ -70,7 +70,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="description" />
+                  <q-icon class="icon-margin" name="library_add" />
                 </template>
               </q-input>
             </div>
@@ -85,7 +85,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="description" />
+                  <q-icon class="icon-margin" name="price_change" />
                 </template>
               </q-input>
             </div>

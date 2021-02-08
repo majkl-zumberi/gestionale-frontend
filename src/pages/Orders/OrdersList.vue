@@ -191,7 +191,7 @@ export default {
   created: function() {
     axios.get("http://localhost:3000/order").then(res => {
       this.orders = res.data;
-    });
+    })
 
     eventBus.$on("items-changed", this.updateList);
     eventBus.$on("item-delete", this.removeArticleFromList);
