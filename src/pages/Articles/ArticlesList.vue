@@ -103,6 +103,12 @@ export default {
     return {
       columns: [
         {
+          name: "id",
+          label: "Cod. Articolo",
+          type: "string",
+          field: article => article.id
+        },
+        {
           name: "name",
           label: "Nome",
           type: "string",
