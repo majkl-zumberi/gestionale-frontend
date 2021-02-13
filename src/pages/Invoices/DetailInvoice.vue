@@ -20,7 +20,7 @@
           <q-tooltip
             v-if="maximizedToggle"
             content-class="bg-white text-primary"
-            >Minimize</q-tooltip
+          >Minimize</q-tooltip
           >
         </q-btn>
         <q-btn
@@ -33,7 +33,7 @@
           <q-tooltip
             v-if="!maximizedToggle"
             content-class="bg-white text-primary"
-            >Maximize</q-tooltip
+          >Maximize</q-tooltip
           >
         </q-btn>
         <q-btn dense flat icon="close" v-close-popup>

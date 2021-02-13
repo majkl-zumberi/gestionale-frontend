@@ -89,6 +89,36 @@
                 </template>
               </q-input>
             </div>
+            <div class="col">
+              <q-input
+                type="number"
+                label="Sconto %"
+                v-model.number="detailArticle.discount"
+                outlined
+                dense
+                clearable
+                clear-icon="close"
+              >
+                <template v-slot:prepend>
+                  <q-icon class="icon-margin" name="price_change" />
+                </template>
+              </q-input>
+            </div>
+            <div class="col">
+              <q-input
+                type="string"
+                label="Note"
+                v-model.number="detailArticle.note"
+                outlined
+                dense
+                clearable
+                clear-icon="close"
+              >
+                <template v-slot:prepend>
+                  <q-icon class="icon-margin" name="price_change" />
+                </template>
+              </q-input>
+            </div>
           </div>
         </q-tab-panel>
       </q-tab-panels>
@@ -105,7 +135,7 @@
           typeof order.articleOrders === 'object' &&
             'articleOrders' in order &&
             order.articleOrders.some(
-              art => art.articleId == '' || art.iva == '' || art.quantity == ''
+              art => art.articleId == '' || art.iva == '' || art.quantity == '' || art.discount == ''
             )
         "
         color="primary"
@@ -115,7 +145,7 @@
             this.order.articleOrders.splice(
               this.order.articleOrders.length,
               0,
-              { articleId: '', quantity: '', iva: '' }
+              { articleId: '', quantity: '', iva: '', note: '', discount: '' }
             )
         "
         icon="save"
@@ -163,7 +193,9 @@ export default {
           {
             articleId: "",
             quantity: "",
-            iva: ""
+            iva: "",
+            note: "",
+            discount: ""
           }
         ]
       }
@@ -181,7 +213,9 @@ export default {
             return axios.put(`http://localhost:3000/detail-order/order/${this.id}/article/${articleOrder.articleId}`,
             {
               quantity:articleOrder.quantity,
-              iva:articleOrder.iva
+              iva:articleOrder.iva,
+              note: articleOrder.note,
+              discount: articleOrder.discount,
             });
 
           });
@@ -208,7 +242,9 @@ export default {
                 `http://localhost:3000/detail-order/${customerOrderData.id}/${articleOrder.articleId}`,
                 {
                   quantity: articleOrder.quantity,
-                  iva: articleOrder.iva
+                  iva: articleOrder.iva,
+                  note: articleOrder.note,
+                  discount: articleOrder.discount
                 }
               );
             }
@@ -248,7 +284,9 @@ export default {
         return {
           articleId: detail.article.id,
           quantity: detail.quantity,
-          iva: detail.iva
+          iva: detail.iva,
+          note: detail.note,
+          discount: detail.discount,
         };
       });
       this.order = {

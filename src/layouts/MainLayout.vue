@@ -63,7 +63,7 @@ const linksData = [
     title: "Fatture",
     caption: "Gestione Fatture",
     icon: "receipt_long",
-    link: ""
+    link: "/#/invoices"
   },
   {
     title: "Ordini",
