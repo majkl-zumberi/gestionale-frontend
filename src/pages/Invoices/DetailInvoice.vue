@@ -20,7 +20,7 @@
           <q-tooltip
             v-if="maximizedToggle"
             content-class="bg-white text-primary"
-          >Minimize</q-tooltip
+            >Minimize</q-tooltip
           >
         </q-btn>
         <q-btn
@@ -33,7 +33,7 @@
           <q-tooltip
             v-if="!maximizedToggle"
             content-class="bg-white text-primary"
-          >Maximize</q-tooltip
+            >Maximize</q-tooltip
           >
         </q-btn>
         <q-btn dense flat icon="close" v-close-popup>
@@ -41,87 +41,92 @@
         </q-btn>
       </q-bar>
 
-      <q-card-section>
-        <div class="text-h6"></div>
-      </q-card-section>
+      <div class="row">
+        <q-card-section class="col-3">
+          <TailInvoice :invoiceTail="tailInvoice" />
+        </q-card-section>
 
-      <q-card-section class="q-pt-none">
-        <!-- struttura tabell qua-->
-        <q-table
-          flat
-          title="Dettaglio Ordine"
-          :data="detailOrder.order"
-          :columns="detailColumns"
-          :filter="filter"
-          row-key="name"
-        >
-          <template v-slot:top-right>
-            <q-input
-              rounded
-              filled
-              dense
-              debounce="300"
-              v-model="filter"
-              placeholder="Cerca"
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
-          </template>
-          <template v-slot:body-cell-actions="props">
-            <q-td :props="props">
-              <q-btn
-                size="sm"
-                round
+        <q-card-section class="col-9">
+          <!-- struttura tabell qua-->
+          <q-table
+            flat
+            title="Dettaglio Fattura"
+            :data="invoiceBody.order"
+            :columns="detailColumns"
+            :filter="filter"
+            row-key="name"
+          >
+            <template v-slot:top-right>
+              <q-input
+                rounded
+                filled
                 dense
-                color="primary"
-                icon="edit"
-                @click.stop="() => {}"
-                class="q-mr-xs"
-              />
-              <q-btn
-                size="sm"
-                round
-                dense
-                color="secondary"
-                icon="delete"
-                @click.stop="() => {}"
-                class="q-mr-sm"
-              />
-            </q-td>
-          </template>
-          <template v-slot:bottom-row>
-            <q-tr>
-              <q-td colspan="100%">
-                Costo totale Articoli
-                {{ detailOrder.totalOrderPrice.toFixed(2) }}€
+                debounce="300"
+                v-model="filter"
+                placeholder="Cerca"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+            <template v-slot:body-cell-actions="props">
+              <q-td :props="props">
+                <q-btn
+                  size="sm"
+                  round
+                  dense
+                  color="primary"
+                  icon="edit"
+                  @click.stop="() => {}"
+                  class="q-mr-xs"
+                />
+                <q-btn
+                  size="sm"
+                  round
+                  dense
+                  color="secondary"
+                  icon="delete"
+                  @click.stop="() => {}"
+                  class="q-mr-sm"
+                />
               </q-td>
-            </q-tr>
-            <q-tr>
-              <q-td colspan="100%">
-                Costo totale scontato
-                {{ detailOrder.totalOrderPriceDiscount.toFixed(2) }}€
-              </q-td>
-            </q-tr>
-            <q-tr>
-              <q-td colspan="100%">
-                Costo totale Articoli + IVA
-                {{ detailOrder.totalOrderPriceIva.toFixed(2) }}€
-              </q-td>
-            </q-tr>
-
-          </template>
-        </q-table>
-      </q-card-section>
+            </template>
+            <template v-slot:bottom-row>
+              <q-tr>
+                <q-td colspan="100%">
+                  Costo totale Articoli
+                  {{ invoiceBody.totalOrderPrice.toFixed(2) }}€
+                </q-td>
+              </q-tr>
+              <q-tr>
+                <q-td colspan="100%">
+                  Costo totale scontato
+                  {{ invoiceBody.totalOrderPriceDiscount.toFixed(2) }}€
+                </q-td>
+              </q-tr>
+              <q-tr>
+                <q-td colspan="100%">
+                  Costo totale Articoli + IVA
+                  {{ invoiceBody.totalOrderPriceIva.toFixed(2) }}€
+                </q-td>
+              </q-tr>
+            </template>
+          </q-table>
+        </q-card-section>
+      </div>
     </q-card>
   </q-dialog>
 </template>
 
 <script>
+import TailInvoice from "./TailInvoice";
 export default {
-  name: "detailModal",
-  props: ["detailOrder"],
+  name: "detailInvoiceMaximized",
+  props: ["invoiceBody", "tailInvoice"],
+  components: {
+    TailInvoice
+  },
   data() {
     return {
       filter: "",
@@ -178,7 +183,7 @@ export default {
           label: "Note",
           type: "string",
           align: "center",
-          field: order => order.note,
+          field: order => order.note
         },
         {
           name: "total",
