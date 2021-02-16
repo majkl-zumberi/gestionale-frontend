@@ -162,14 +162,18 @@ export default {
         parent: this
       });
     },
-    openDetailOrder: function(idMaster) {
+    openDetailOrder: async function(idMaster) {
       this.dialog = true;
+      const { data: invoiceTail } = await axios.get(
+        `http://localhost:3000/invoice-tail/master/${idMaster}`
+      );
       axios
         .get(`http://localhost:3000/invoice/master/${idMaster}`)
         .then(res => {
           this.$q.dialog({
             component: DetailInvoice,
-            detailOrder: res.data,
+            invoiceBody: res.data,
+            tailInvoice: invoiceTail,
             parent: this
           });
         });
@@ -183,14 +187,16 @@ export default {
       this.invoiceMaster.splice(idx, 1);
     },
     updateArticle(articleToUpdate) {
-      const idx = this.invoiceMaster.findIndex(el => el.id === articleToUpdate.id);
+      const idx = this.invoiceMaster.findIndex(
+        el => el.id === articleToUpdate.id
+      );
       this.invoiceMaster.splice(idx, 1, articleToUpdate);
     }
   },
   created: function() {
     axios.get("http://localhost:3000/invoice-master").then(res => {
       this.invoiceMaster = res.data;
-    })
+    });
 
     eventBus.$on("items-changed", this.updateList);
     eventBus.$on("item-delete", this.removeArticleFromList);
