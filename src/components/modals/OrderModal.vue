@@ -41,85 +41,92 @@
             v-for="(detailArticle, idx) in order.articleOrders"
             :key="idx"
           >
-            <div class="col">
-              <q-select
-                :disable="id && detailArticle.articleId != ''"
-                label="Articolo"
-                v-model="detailArticle.articleId"
-                :options="articleOptions"
-                outlined
-                dense
-                clearable
-                clear-icon="close"
-                emit-value
-                map-options
-              >
-                <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="article" />
-                </template>
-              </q-select>
-            </div>
-            <div class="col">
-              <q-input
-                type="number"
-                label="Quantità articolo"
-                v-model.number="detailArticle.quantity"
-                outlined
-                dense
-                clearable
-                clear-icon="close"
-              >
-                <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="library_add" />
-                </template>
-              </q-input>
-            </div>
-            <div class="col">
-              <q-input
-                type="number"
-                label="IVA %"
-                v-model.number="detailArticle.iva"
-                outlined
-                dense
-                clearable
-                clear-icon="close"
-              >
-                <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="price_change" />
-                </template>
-              </q-input>
-            </div>
-            <div class="col">
-              <q-input
-                type="number"
-                label="Sconto %"
-                v-model.number="detailArticle.discount"
-                outlined
-                dense
-                clearable
-                clear-icon="close"
-              >
-                <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="price_change" />
-                </template>
-              </q-input>
-            </div>
-            <div class="col">
-              <q-input
-                type="string"
-                label="Note"
-                v-model.number="detailArticle.note"
-                outlined
-                dense
-                clearable
-                clear-icon="close"
-              >
-                <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="price_change" />
-                </template>
-              </q-input>
-            </div>
+            <q-card class="my-card q-ma-sm">
+              <q-card-section class="row q-col-gutter-md q-mb-lg">
+                <div class="col">
+                  <q-select
+                    :disable="id && detailArticle.articleId != ''"
+                    label="Articolo"
+                    v-model="detailArticle.articleId"
+                    :options="articleOptions"
+                    outlined
+                    dense
+                    clearable
+                    clear-icon="close"
+                    emit-value
+                    map-options
+                  >
+                    <template v-slot:prepend>
+                      <q-icon class="icon-margin" name="article" />
+                    </template>
+                  </q-select>
+                </div>
+                <div class="col">
+                  <q-input
+                    type="number"
+                    label="Quantità articolo"
+                    v-model.number="detailArticle.quantity"
+                    outlined
+                    dense
+                    clearable
+                    clear-icon="close"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon class="icon-margin" name="library_add" />
+                    </template>
+                  </q-input>
+                </div>
+                <div class="row q-col-gutter-md q-mb-lg">
+                  <div class="col">
+                    <q-input
+                      type="number"
+                      label="IVA %"
+                      v-model.number="detailArticle.iva"
+                      outlined
+                      dense
+                      clearable
+                      clear-icon="close"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon class="icon-margin" name="price_change" />
+                      </template>
+                    </q-input>
+                  </div>
+                  <div class="col">
+                    <q-input
+                      type="number"
+                      label="Sconto %"
+                      v-model.number="detailArticle.discount"
+                      outlined
+                      dense
+                      clearable
+                      clear-icon="close"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon class="icon-margin" name="price_change" />
+                      </template>
+                    </q-input>
+                  </div>
+                  <div class="col">
+                    <q-input
+                      type="string"
+                      label="Note"
+                      v-model.number="detailArticle.note"
+                      outlined
+                      dense
+                      clearable
+                      clear-icon="close"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon class="icon-margin" name="price_change" />
+                      </template>
+                    </q-input>
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
           </div>
+          <q-separator />
         </q-tab-panel>
       </q-tab-panels>
     </q-card-section>
@@ -130,12 +137,16 @@
     -->
     <q-card-actions align="right">
       <q-btn
-        v-if="activeTab === 'articoli' && action=='add'"
+        v-if="activeTab === 'articoli' && action == 'add'"
         :disable="
           typeof order.articleOrders === 'object' &&
             'articleOrders' in order &&
             order.articleOrders.some(
-              art => art.articleId == '' || art.iva == '' || art.quantity == '' || art.discount == ''
+              art =>
+                art.articleId == '' ||
+                art.iva == '' ||
+                art.quantity == '' ||
+                art.discount == ''
             )
         "
         color="primary"
@@ -151,7 +162,7 @@
         icon="save"
       />
       <q-btn
-        v-if="activeTab === 'articoli' && action=='add'"
+        v-if="activeTab === 'articoli' && action == 'add'"
         :disable="order.articleOrders.length == 1"
         color="primary"
         label="rimuovi articolo"
@@ -209,17 +220,20 @@ export default {
       if (this.id) {
         //edit mode
         try {
-          const updateDetailPromises= this.order.articleOrders.map(articleOrder=>{
-            return axios.put(`http://localhost:3000/detail-order/order/${this.id}/article/${articleOrder.articleId}`,
-            {
-              quantity:articleOrder.quantity,
-              iva:articleOrder.iva,
-              note: articleOrder.note,
-              discount: articleOrder.discount,
-            });
-
-          });
-          axios.all({...updateDetailPromises}).then(resultArr=>{});
+          const updateDetailPromises = this.order.articleOrders.map(
+            articleOrder => {
+              return axios.put(
+                `http://localhost:3000/detail-order/order/${this.id}/article/${articleOrder.articleId}`,
+                {
+                  quantity: articleOrder.quantity,
+                  iva: articleOrder.iva,
+                  note: articleOrder.note,
+                  discount: articleOrder.discount
+                }
+              );
+            }
+          );
+          axios.all({ ...updateDetailPromises }).then(resultArr => {});
           Notify.create("ordine modificato!");
           //eventBus.$emit("items-update", data);
           this.hide();
@@ -286,7 +300,7 @@ export default {
           quantity: detail.quantity,
           iva: detail.iva,
           note: detail.note,
-          discount: detail.discount,
+          discount: detail.discount
         };
       });
       this.order = {
