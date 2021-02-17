@@ -92,6 +92,7 @@
                 />
               </q-td>
             </template>
+            <!--
             <template v-slot:bottom-row>
               <q-tr>
                 <q-td colspan="100%">
@@ -112,8 +113,27 @@
                 </q-td>
               </q-tr>
             </template>
+            -->
           </q-table>
         </q-card-section>
+
+        <q-footer elevated class="bg-grey-6">
+          <q-toolbar>
+            <q-td colspan="100%">
+              Costo totale Articoli
+              {{ invoiceBody.totalOrderPrice.toFixed(2) }}€
+            </q-td>
+            <q-td colspan="100%">
+              Costo totale scontato
+              {{ invoiceBody.totalOrderPriceDiscount.toFixed(2) }}€
+            </q-td>
+            <q-td colspan="100%">
+              Costo totale Articoli + IVA
+              {{ invoiceBody.totalOrderPriceIva.toFixed(2) }}€
+            </q-td>
+          </q-toolbar>
+        </q-footer>
+
       </div>
     </q-card>
   </q-dialog>

@@ -8,7 +8,26 @@
           class="rounded-borders"
           style="max-width: 350px"
         >
-          <q-item-label header>dettaglio Fatturazione</q-item-label>
+          <q-item-label header>Dettaglio Fatturazione</q-item-label>
+
+          <q-item clickable v-ripple>
+            <q-item-section avatar top>
+              <q-avatar icon="face" color="grey-8" text-color="white" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label class="dark" lines="1" overline
+              >Codice Cliente</q-item-label
+              >
+              <q-item-label caption
+              >{{ invoiceTail.ccode }}</q-item-label
+              >
+            </q-item-section>
+
+            <q-item-section side>
+              <q-icon name="info"/>
+            </q-item-section>
+          </q-item>
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
@@ -115,7 +134,9 @@
         </q-list>
       </div>
     </q-card-section>
+
   </q-card>
+
 </template>
 
 <script>
