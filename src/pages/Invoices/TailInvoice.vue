@@ -25,7 +25,7 @@
             </q-item-section>
 
             <q-item-section side>
-              <q-icon name="info" color="green" />
+              <q-icon name="info"/>
             </q-item-section>
           </q-item>
 
@@ -66,7 +66,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="monitor_weight" color="primary" text-color="white" />
+              <q-avatar icon="monitor_weight" color="brown-6" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -83,7 +83,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="local_shipping" color="grey" text-color="white" />
+              <q-avatar icon="local_shipping" color="yellow-14" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -94,13 +94,13 @@
             </q-item-section>
 
             <q-item-section side>
-              <q-icon name="info" color="amber" />
+              <q-icon name="info"/>
             </q-item-section>
           </q-item>
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="event" color="grey" text-color="white" />
+              <q-avatar icon="event" color="lime" text-color="white" />
             </q-item-section>
 
             <q-item-section>
