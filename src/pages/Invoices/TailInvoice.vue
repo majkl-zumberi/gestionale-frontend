@@ -12,7 +12,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="place" color="primary" text-color="white" />
+              <q-avatar icon="my_location" color="primary" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -31,7 +31,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="my_location" color="orange" text-color="white" />
+              <q-avatar icon="place" color="orange" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -46,7 +46,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="folder" color="teal" text-color="white" />
+              <q-avatar icon="flag" color="teal" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -66,7 +66,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="place" color="primary" text-color="white" />
+              <q-avatar icon="monitor_weight" color="primary" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -83,7 +83,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="place" color="grey" text-color="white" />
+              <q-avatar icon="local_shipping" color="grey" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -100,7 +100,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="library_music" color="grey" text-color="white" />
+              <q-avatar icon="event" color="grey" text-color="white" />
             </q-item-section>
 
             <q-item-section>
