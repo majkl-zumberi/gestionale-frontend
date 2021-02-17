@@ -67,7 +67,7 @@
                 size="sm"
                 round
                 dense
-                color="secondary"
+                color="negative"
                 icon="delete"
                 @click.stop="
                   () =>
