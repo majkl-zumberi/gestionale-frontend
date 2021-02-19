@@ -69,7 +69,7 @@
                 dense
                 color="accent"
                 icon="search"
-                @click="openDetailOrder(props.row.id)"
+                @click="openDetailOrder(props.row)"
                 class="q-mr-xs"
               />
               <q-btn
@@ -162,18 +162,20 @@ export default {
         parent: this
       });
     },
-    openDetailOrder: async function(idMaster) {
+    openDetailOrder: async function(detailRow) {
+      console.log(detailRow.customer);
       this.dialog = true;
       const { data: invoiceTail } = await axios.get(
-        `http://localhost:3000/invoice-tail/master/${idMaster}`
+        `http://localhost:3000/invoice-tail/master/${detailRow.id}`
       );
       axios
-        .get(`http://localhost:3000/invoice/master/${idMaster}`)
+        .get(`http://localhost:3000/invoice/master/${detailRow.id}`)
         .then(res => {
           this.$q.dialog({
             component: DetailInvoice,
             invoiceBody: res.data,
             tailInvoice: invoiceTail,
+            customer: detailRow.customer,
             parent: this
           });
         });

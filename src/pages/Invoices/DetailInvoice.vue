@@ -43,7 +43,7 @@
 
       <div class="row">
         <q-card-section class="col-3">
-          <TailInvoice :invoiceTail="tailInvoice" />
+          <TailInvoice :invoiceTail="tailInvoice" :customer="customer" />
         </q-card-section>
 
         <q-card-section class="col-9">
@@ -92,48 +92,41 @@
                 />
               </q-td>
             </template>
-            <!--
+
             <template v-slot:bottom-row>
               <q-tr>
                 <q-td colspan="100%">
-                  Costo totale Articoli
+                  Importo totale Articoli
                   {{ invoiceBody.totalOrderPrice.toFixed(2) }}€
                 </q-td>
               </q-tr>
               <q-tr>
                 <q-td colspan="100%">
-                  Costo totale scontato
+                  Importo totale scontato
                   {{ invoiceBody.totalOrderPriceDiscount.toFixed(2) }}€
                 </q-td>
               </q-tr>
               <q-tr>
                 <q-td colspan="100%">
-                  Costo totale Articoli + IVA
+                  Valore totale sconto
+                  {{ invoiceBody.valueOrderPriceDiscount.toFixed(2) }}€
+                </q-td>
+              </q-tr>
+              <q-tr>
+                <q-td colspan="100%">
+                  Importo totale scontato + IVA
                   {{ invoiceBody.totalOrderPriceIva.toFixed(2) }}€
                 </q-td>
               </q-tr>
+              <q-tr>
+                <q-td colspan="100%">
+                  Valore Totale IVA
+                  {{ invoiceBody.valueOrderPriceIva.toFixed(2) }}€
+                </q-td>
+              </q-tr>
             </template>
-            -->
           </q-table>
         </q-card-section>
-
-        <q-footer elevated class="bg-grey-6">
-          <q-toolbar>
-            <q-td colspan="100%">
-              Costo totale Articoli
-              {{ invoiceBody.totalOrderPrice.toFixed(2) }}€
-            </q-td>
-            <q-td colspan="100%">
-              Costo totale scontato
-              {{ invoiceBody.totalOrderPriceDiscount.toFixed(2) }}€
-            </q-td>
-            <q-td colspan="100%">
-              Costo totale Articoli + IVA
-              {{ invoiceBody.totalOrderPriceIva.toFixed(2) }}€
-            </q-td>
-          </q-toolbar>
-        </q-footer>
-
       </div>
     </q-card>
   </q-dialog>
@@ -143,7 +136,7 @@
 import TailInvoice from "./TailInvoice";
 export default {
   name: "detailInvoiceMaximized",
-  props: ["invoiceBody", "tailInvoice"],
+  props: ["invoiceBody", "tailInvoice", "customer"],
   components: {
     TailInvoice
   },
@@ -153,13 +146,6 @@ export default {
       dialog: true,
       maximizedToggle: true,
       detailColumns: [
-        {
-          name: "id",
-          label: "Codice Articolo",
-          type: "string",
-          align: "center",
-          field: order => order.article.id
-        },
         {
           name: "name",
           label: "Descrizione Articolo",
@@ -199,6 +185,14 @@ export default {
           format: discount => `${discount}%`
         },
         {
+          name: "valueDiscount",
+          label: "Valore sconto",
+          type: "string",
+          align: "center",
+          field: order => order.valueDiscount,
+          format: discount => `${discount.toFixed(2)}€`
+        },
+        {
           name: "note",
           label: "Note",
           type: "string",
@@ -207,19 +201,35 @@ export default {
         },
         {
           name: "total",
-          label: "Imponibile",
+          label: "totale",
           type: "string",
           align: "center",
           field: order => order.total,
           format: price => `${price.toFixed(2)}€`
         },
         {
+          name: "totalDiscount",
+          label: "tot scontato -iva",
+          type: "string",
+          align: "center",
+          field: order => order.totalDiscount,
+          format: price => `${price.toFixed(2)}€`
+        },
+        {
           name: "totalIva",
-          label: "Totale",
+          label: "Totale scontato +iva",
           type: "string",
           align: "center",
           field: order => order.totalIva,
           format: price => `${price}€`
+        },
+        {
+          name: "valueIva",
+          label: "val iva",
+          type: "string",
+          align: "center",
+          field: order => order.valueIva,
+          format: price => `${price.toFixed(2)}€`
         }
       ]
     };
