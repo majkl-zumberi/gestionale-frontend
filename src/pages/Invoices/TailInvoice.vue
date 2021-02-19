@@ -17,15 +17,17 @@
 
             <q-item-section>
               <q-item-label class="dark" lines="1" overline
-              >Codice Cliente</q-item-label
+                >Cliente</q-item-label
               >
               <q-item-label caption
-              >{{ invoiceTail.ccode }}</q-item-label
+                >{{ customer.businessName }} ({{
+                  customer.ccode
+                }})</q-item-label
               >
             </q-item-section>
 
             <q-item-section side>
-              <q-icon name="info"/>
+              <q-icon name="info" />
             </q-item-section>
           </q-item>
 
@@ -44,7 +46,7 @@
             </q-item-section>
 
             <q-item-section side>
-              <q-icon name="info"/>
+              <q-icon name="info" />
             </q-item-section>
           </q-item>
 
@@ -85,7 +87,11 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="monitor_weight" color="brown-8" text-color="white" />
+              <q-avatar
+                icon="monitor_weight"
+                color="brown-8"
+                text-color="white"
+              />
             </q-item-section>
 
             <q-item-section>
@@ -102,7 +108,11 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="local_shipping" color="deep-orange-9" text-color="white" />
+              <q-avatar
+                icon="local_shipping"
+                color="deep-orange-9"
+                text-color="white"
+              />
             </q-item-section>
 
             <q-item-section>
@@ -113,7 +123,7 @@
             </q-item-section>
 
             <q-item-section side>
-              <q-icon name="info"/>
+              <q-icon name="info" />
             </q-item-section>
           </q-item>
 
@@ -134,16 +144,14 @@
         </q-list>
       </div>
     </q-card-section>
-
   </q-card>
-
 </template>
 
 <script>
 import { date, format } from "quasar";
 export default {
-  name: "tailInvoce",
-  props: ["invoiceTail"],
+  name: "tailInvoice",
+  props: ["invoiceTail", "customer"],
   data() {
     return {};
   },
