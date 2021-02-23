@@ -51,11 +51,43 @@
           <q-table
             flat
             title="Dettaglio Fattura"
-            :data="invoiceBody.order"
+            :data="internalInvoiceBody.order"
             :columns="detailColumns"
             :filter="filter"
             row-key="name"
           >
+            <template v-slot:body="props">
+              <q-tr :props="props">
+                <q-td
+                  v-for="tdVal in props.cols"
+                  :key="tdVal.name"
+                  :props="props"
+                >
+                  {{ tdVal.value }}
+                  <q-popup-edit
+                    :title="'Aggiorna ' + tdVal.label"
+                    v-if="isColumnEditable(tdVal.name)"
+                  >
+                    <q-input
+                      :type="getColumnTypeByName(tdVal.name)"
+                      v-model="props.row[tdVal.name]"
+                      dense
+                      autofocus
+                      counter
+                      @change="
+                        e =>
+                          updateBodyInvoiceRecordVal(
+                            props.row.order.id,
+                            props.row.article.id,
+                            props.row[tdVal.name],
+                            tdVal.name
+                          )
+                      "
+                    />
+                  </q-popup-edit>
+                </q-td>
+              </q-tr>
+            </template>
             <template v-slot:top-right>
               <q-input
                 rounded
@@ -97,31 +129,31 @@
               <q-tr>
                 <q-td colspan="100%">
                   Importo totale Articoli
-                  {{ invoiceBody.totalOrderPrice.toFixed(2) }}€
+                  {{ internalInvoiceBody.totalOrderPrice.toFixed(2) }}€
                 </q-td>
               </q-tr>
               <q-tr>
                 <q-td colspan="100%">
                   Importo totale scontato
-                  {{ invoiceBody.totalOrderPriceDiscount.toFixed(2) }}€
+                  {{ internalInvoiceBody.totalOrderPriceDiscount.toFixed(2) }}€
                 </q-td>
               </q-tr>
               <q-tr>
                 <q-td colspan="100%">
                   Valore totale sconto
-                  {{ invoiceBody.valueOrderPriceDiscount.toFixed(2) }}€
+                  {{ internalInvoiceBody.valueOrderPriceDiscount.toFixed(2) }}€
                 </q-td>
               </q-tr>
               <q-tr>
                 <q-td colspan="100%">
                   Importo totale scontato + IVA
-                  {{ invoiceBody.totalOrderPriceIva.toFixed(2) }}€
+                  {{ internalInvoiceBody.totalOrderPriceIva.toFixed(2) }}€
                 </q-td>
               </q-tr>
               <q-tr>
                 <q-td colspan="100%">
                   Valore Totale IVA
-                  {{ invoiceBody.valueOrderPriceIva.toFixed(2) }}€
+                  {{ internalInvoiceBody.valueOrderPriceIva.toFixed(2) }}€
                 </q-td>
               </q-tr>
             </template>
@@ -133,10 +165,11 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TailInvoice from "./TailInvoice";
 export default {
   name: "detailInvoiceMaximized",
-  props: ["invoiceBody", "tailInvoice", "customer"],
+  props: ["invoiceBody", "tailInvoice", "customer","masterId"],
   components: {
     TailInvoice
   },
@@ -145,50 +178,55 @@ export default {
       filter: "",
       dialog: true,
       maximizedToggle: true,
+      internalInvoiceBody:{},
       detailColumns: [
         {
           name: "name",
-          label: "Descrizione Articolo",
+          label: "Desc. Articolo",
           type: "string",
           align: "center",
+          editable: true,
           field: order => order.article.name
         },
         {
           name: "quantity",
           label: "Quantità",
-          type: "string",
+          type: "number",
           align: "center",
+          editable: true,
           field: order => order.quantity
         },
         {
           name: "price",
           label: "Prezzo",
-          type: "string",
+          type: "number",
           align: "center",
+          editable: false,
           field: order => order.article.price,
           format: price => `${price}€`
         },
         {
           name: "iva",
-          label: "IVA",
-          type: "string",
+          label: "IVA(%)",
+          type: "number",
           align: "center",
-          field: order => order.iva,
-          format: price => `${price}%`
+          editable: true,
+          field: order => order.iva
         },
         {
           name: "discount",
-          label: "Sconto",
-          type: "string",
+          label: "Sconto(%)",
+          type: "number",
           align: "center",
-          field: order => order.discount,
-          format: discount => `${discount}%`
+          editable: true,
+          field: order => order.discount
         },
         {
           name: "valueDiscount",
           label: "Valore sconto",
-          type: "string",
+          type: "number",
           align: "center",
+          editable: false,
           field: order => order.valueDiscount,
           format: discount => `${discount.toFixed(2)}€`
         },
@@ -197,6 +235,7 @@ export default {
           label: "Note",
           type: "string",
           align: "center",
+          editable: true,
           field: order => order.note
         },
         {
@@ -204,6 +243,7 @@ export default {
           label: "totale",
           type: "string",
           align: "center",
+          editable: false,
           field: order => order.total,
           format: price => `${price.toFixed(2)}€`
         },
@@ -212,6 +252,7 @@ export default {
           label: "tot scontato -iva",
           type: "string",
           align: "center",
+          editable: false,
           field: order => order.totalDiscount,
           format: price => `${price.toFixed(2)}€`
         },
@@ -220,6 +261,7 @@ export default {
           label: "Totale scontato +iva",
           type: "string",
           align: "center",
+          editable: false,
           field: order => order.totalIva,
           format: price => `${price}€`
         },
@@ -228,11 +270,37 @@ export default {
           label: "val iva",
           type: "string",
           align: "center",
+          editable: false,
           field: order => order.valueIva,
           format: price => `${price.toFixed(2)}€`
         }
       ]
     };
+  },
+  methods: {
+    getColumnTypeByName(name) {
+      return this.detailColumns.find(col => col.name == name).type;
+    },
+    isColumnEditable(name) {
+      return this.detailColumns.find(col => col.name == name).editable;
+    },
+    updateBodyInvoiceRecordVal(idOrder,idArticle, nuovoValore, tipoModifica) {
+      console.log({ idOrder });
+      console.log({ idArticle });
+      console.log({ nuovoValore });
+      console.log({ tipoModifica });
+      const body={[tipoModifica]:nuovoValore};
+      axios.put(`http://localhost:3000/invoice/order/${idOrder}/article/${idArticle}`,{
+        ...body
+      }).then(res=>{
+        axios.get(`http://localhost:3000/invoice/master/${this.masterId}`).then(res=>{
+          this.internalInvoiceBody={...res.data}
+        })
+      })
+    }
+  },
+  created(){
+    this.internalInvoiceBody={...this.invoiceBody}
   }
 };
 </script>

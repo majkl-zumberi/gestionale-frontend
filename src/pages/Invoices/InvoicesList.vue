@@ -175,6 +175,7 @@ export default {
             component: DetailInvoice,
             invoiceBody: res.data,
             tailInvoice: invoiceTail,
+            masterId:detailRow.id,
             customer: detailRow.customer,
             parent: this
           });
