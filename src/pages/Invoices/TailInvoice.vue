@@ -145,9 +145,9 @@
 <q-separator spaced />
 <q-expansion-item
 
-        icon="signal_wifi_off"
-        style="color:black"
-        label="dettagli importo"
+        icon="paid"
+        style="color:slategrey"
+        label="Dettagli Importo"
       >
         <q-separator spaced />
           <q-item-label header>Totali</q-item-label>
@@ -155,8 +155,8 @@
           <q-item clickable v-ripple>
             <q-item-section avatar top>
               <q-avatar
-                icon="monitor_weight"
-                color="brown-8"
+                icon="attach_money"
+                color="green-8"
                 text-color="white"
               />
             </q-item-section>
@@ -174,8 +174,8 @@
           <q-item clickable v-ripple>
             <q-item-section avatar top>
               <q-avatar
-                icon="local_shipping"
-                color="deep-orange-9"
+                icon="sell"
+                color="orange-7"
                 text-color="white"
               />
             </q-item-section>
@@ -192,7 +192,7 @@
 
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="event" color="light-green-9" text-color="white" />
+              <q-avatar icon="money_off" color="deep-orange-8" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -204,7 +204,7 @@
           </q-item>
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="event" color="light-green-9" text-color="white" />
+              <q-avatar icon="price_check" color="light-green-9" text-color="white" />
             </q-item-section>
 
             <q-item-section>
@@ -216,7 +216,7 @@
           </q-item>
           <q-item clickable v-ripple>
             <q-item-section avatar top>
-              <q-avatar icon="event" color="light-green-9" text-color="white" />
+              <q-avatar icon="request_quote" color="deep-purple-10" text-color="white" />
             </q-item-section>
 
             <q-item-section>
