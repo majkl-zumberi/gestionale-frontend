@@ -43,7 +43,7 @@
 
       <div class="row">
         <q-card-section class="col-3">
-          <TailInvoice :invoiceTail="tailInvoice" :customer="customer" :totals="invoiceBody" />
+          <TailInvoice :invoiceTail="tailInvoice" :customer="customer" :totals="internalInvoiceBody" />
         </q-card-section>
 
         <q-card-section class="col-9">
