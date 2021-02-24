@@ -143,6 +143,12 @@
           </q-item>
 
 
+<q-expansion-item
+
+        icon="signal_wifi_off"
+        style="color:black"
+        label="dettagli importo"
+      >
         <q-separator spaced />
           <q-item-label header>Totali</q-item-label>
 
@@ -220,6 +226,8 @@
 
 
           </q-item>
+      </q-expansion-item>
+
         </q-list>
       </div>
     </q-card-section>
