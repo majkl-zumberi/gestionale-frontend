@@ -141,6 +141,85 @@
               <q-icon name="info" />
             </q-item-section>
           </q-item>
+
+
+        <q-separator spaced />
+          <q-item-label header>Totali</q-item-label>
+
+          <q-item clickable v-ripple>
+            <q-item-section avatar top>
+              <q-avatar
+                icon="monitor_weight"
+                color="brown-8"
+                text-color="white"
+              />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label lines="1" overline>Importo totale Articoli</q-item-label>
+              <q-item-label caption
+                >{{ totals.totalOrderPrice.toFixed(2) }}€</q-item-label
+              >
+            </q-item-section>
+
+
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section avatar top>
+              <q-avatar
+                icon="local_shipping"
+                color="deep-orange-9"
+                text-color="white"
+              />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label lines="1" overline>Importo totale scontato</q-item-label>
+              <q-item-label caption
+                >{{ totals.totalOrderPriceDiscount.toFixed(2) }}&euro;</q-item-label
+              >
+            </q-item-section>
+
+
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section avatar top>
+              <q-avatar icon="event" color="light-green-9" text-color="white" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label lines="1" overline>Valore totale sconto</q-item-label>
+              <q-item-label caption>{{ totals.valueOrderPriceDiscount.toFixed(2) }}&euro;</q-item-label>
+            </q-item-section>
+
+
+          </q-item>
+          <q-item clickable v-ripple>
+            <q-item-section avatar top>
+              <q-avatar icon="event" color="light-green-9" text-color="white" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label lines="1" overline>Importo totale scontato + IVA</q-item-label>
+              <q-item-label caption>{{ totals.totalOrderPriceIva.toFixed(2) }}&euro;</q-item-label>
+            </q-item-section>
+
+
+          </q-item>
+          <q-item clickable v-ripple>
+            <q-item-section avatar top>
+              <q-avatar icon="event" color="light-green-9" text-color="white" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label lines="1" overline>Valore Totale IVA</q-item-label>
+              <q-item-label caption>{{ totals.valueOrderPriceIva.toFixed(2) }}&euro;</q-item-label>
+            </q-item-section>
+
+
+          </q-item>
         </q-list>
       </div>
     </q-card-section>
@@ -151,7 +230,7 @@
 import { date, format } from "quasar";
 export default {
   name: "tailInvoice",
-  props: ["invoiceTail", "customer"],
+  props: ["invoiceTail", "customer","totals"],
   data() {
     return {};
   },

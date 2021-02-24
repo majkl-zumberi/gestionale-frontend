@@ -43,7 +43,7 @@
 
       <div class="row">
         <q-card-section class="col-3">
-          <TailInvoice :invoiceTail="tailInvoice" :customer="customer" />
+          <TailInvoice :invoiceTail="tailInvoice" :customer="customer" :totals="invoiceBody" />
         </q-card-section>
 
         <q-card-section class="col-9">
@@ -125,38 +125,6 @@
               </q-td>
             </template>
 
-            <template v-slot:bottom-row>
-              <q-tr>
-                <q-td colspan="100%">
-                  Importo totale Articoli
-                  {{ internalInvoiceBody.totalOrderPrice.toFixed(2) }}€
-                </q-td>
-              </q-tr>
-              <q-tr>
-                <q-td colspan="100%">
-                  Importo totale scontato
-                  {{ internalInvoiceBody.totalOrderPriceDiscount.toFixed(2) }}€
-                </q-td>
-              </q-tr>
-              <q-tr>
-                <q-td colspan="100%">
-                  Valore totale sconto
-                  {{ internalInvoiceBody.valueOrderPriceDiscount.toFixed(2) }}€
-                </q-td>
-              </q-tr>
-              <q-tr>
-                <q-td colspan="100%">
-                  Importo totale scontato + IVA
-                  {{ internalInvoiceBody.totalOrderPriceIva.toFixed(2) }}€
-                </q-td>
-              </q-tr>
-              <q-tr>
-                <q-td colspan="100%">
-                  Valore Totale IVA
-                  {{ internalInvoiceBody.valueOrderPriceIva.toFixed(2) }}€
-                </q-td>
-              </q-tr>
-            </template>
           </q-table>
         </q-card-section>
       </div>
