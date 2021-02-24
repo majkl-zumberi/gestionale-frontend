@@ -10,7 +10,7 @@
         >
           <q-expansion-item
             expand-separator
-            icon="signal_wifi_off"
+            icon="receipt_long"
             label="Fatturazione"
             style="color:black"
           >
@@ -99,8 +99,8 @@
 
           <q-expansion-item
             expand-separator
-            icon="signal_wifi_off"
-            label="spedizione"
+            icon="local_shipping"
+            label="Spedizione"
             style="color:black"
           >
             <q-item-label header>Dettagli Spedizione</q-item-label>
@@ -169,7 +169,7 @@
 
           <q-expansion-item
             icon="paid"
-            style="color:slategrey"
+            style="color:black"
             label="Dettagli Importo"
           >
             <q-separator spaced />
