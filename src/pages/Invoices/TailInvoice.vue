@@ -142,7 +142,7 @@
             </q-item-section>
           </q-item>
 
-
+<q-separator spaced />
 <q-expansion-item
 
         icon="signal_wifi_off"

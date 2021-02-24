@@ -11,5 +11,8 @@
     "modal",
     "component",
     "icons"
+  ],
+  "i18n-ally.localesPaths": [
+    "src/i18n"
   ]
 }
