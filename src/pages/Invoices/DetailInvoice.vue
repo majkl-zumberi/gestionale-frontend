@@ -43,7 +43,11 @@
 
       <div class="row">
         <q-card-section class="col-3">
-          <TailInvoice :invoiceTail="tailInvoice" :customer="customer" :totals="internalInvoiceBody" />
+          <TailInvoice
+            :invoiceTail="tailInvoice"
+            :customer="customer"
+            :totals="internalInvoiceBody"
+          />
         </q-card-section>
 
         <q-card-section class="col-9">
@@ -54,6 +58,7 @@
             :data="internalInvoiceBody.order"
             :columns="detailColumns"
             :filter="filter"
+            :visible-columns="visibleColumns"
             row-key="name"
           >
             <template v-slot:body="props">
@@ -89,6 +94,20 @@
               </q-tr>
             </template>
             <template v-slot:top-right>
+              <q-select
+                v-model="visibleColumns"
+                multiple
+                outlined
+                dense
+                options-dense
+                :display-value="'Filtra colonne'"
+                emit-value
+                map-options
+                :options="detailColumns"
+                option-value="name"
+                options-cover
+                style="min-width: 150px;margin-right:1.5em"
+              />
               <q-input
                 rounded
                 filled
@@ -124,7 +143,6 @@
                 />
               </q-td>
             </template>
-
           </q-table>
         </q-card-section>
       </div>
@@ -133,11 +151,11 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import TailInvoice from "./TailInvoice";
 export default {
   name: "detailInvoiceMaximized",
-  props: ["invoiceBody", "tailInvoice", "customer","masterId"],
+  props: ["invoiceBody", "tailInvoice", "customer", "masterId"],
   components: {
     TailInvoice
   },
@@ -146,14 +164,38 @@ export default {
       filter: "",
       dialog: true,
       maximizedToggle: true,
-      internalInvoiceBody:{},
+      internalInvoiceBody: {},
+      visibleColumns: [
+        "id",
+        "name",
+        "quantity",
+        "price",
+        "iva",
+        "discount",
+        "valueDiscount",
+        "note",
+        "total",
+        "totalDiscount",
+        "totalIva",
+        "valueIva"
+      ],
       detailColumns: [
+        {
+          name: "id",
+          label: "id",
+          type: "string",
+          align: "center",
+          editable: false,
+          sortable: true,
+          field: order => order.id
+        },
         {
           name: "name",
           label: "Desc. Articolo",
           type: "string",
           align: "center",
           editable: true,
+          sortable: true,
           field: order => order.article.name
         },
         {
@@ -162,6 +204,7 @@ export default {
           type: "number",
           align: "center",
           editable: true,
+          sortable: true,
           field: order => order.quantity
         },
         {
@@ -170,6 +213,7 @@ export default {
           type: "number",
           align: "center",
           editable: false,
+          sortable: true,
           field: order => order.article.price,
           format: price => `${price}€`
         },
@@ -179,6 +223,7 @@ export default {
           type: "number",
           align: "center",
           editable: true,
+          sortable: true,
           field: order => order.iva
         },
         {
@@ -187,6 +232,7 @@ export default {
           type: "number",
           align: "center",
           editable: true,
+          sortable: true,
           field: order => order.discount
         },
         {
@@ -195,6 +241,7 @@ export default {
           type: "number",
           align: "center",
           editable: false,
+          sortable: true,
           field: order => order.valueDiscount,
           format: discount => `${discount.toFixed(2)}€`
         },
@@ -204,6 +251,7 @@ export default {
           type: "string",
           align: "center",
           editable: true,
+          sortable: true,
           field: order => order.note
         },
         {
@@ -212,6 +260,7 @@ export default {
           type: "string",
           align: "center",
           editable: false,
+          sortable: true,
           field: order => order.total,
           format: price => `${price.toFixed(2)}€`
         },
@@ -221,6 +270,7 @@ export default {
           type: "string",
           align: "center",
           editable: false,
+          sortable: true,
           field: order => order.totalDiscount,
           format: price => `${price.toFixed(2)}€`
         },
@@ -230,6 +280,7 @@ export default {
           type: "string",
           align: "center",
           editable: false,
+          sortable: true,
           field: order => order.totalIva,
           format: price => `${price}€`
         },
@@ -239,6 +290,7 @@ export default {
           type: "string",
           align: "center",
           editable: false,
+          sortable: true,
           field: order => order.valueIva,
           format: price => `${price.toFixed(2)}€`
         }
@@ -252,23 +304,30 @@ export default {
     isColumnEditable(name) {
       return this.detailColumns.find(col => col.name == name).editable;
     },
-    updateBodyInvoiceRecordVal(idOrder,idArticle, nuovoValore, tipoModifica) {
+    updateBodyInvoiceRecordVal(idOrder, idArticle, nuovoValore, tipoModifica) {
       console.log({ idOrder });
       console.log({ idArticle });
       console.log({ nuovoValore });
       console.log({ tipoModifica });
-      const body={[tipoModifica]:nuovoValore};
-      axios.put(`http://localhost:3000/invoice/order/${idOrder}/article/${idArticle}`,{
-        ...body
-      }).then(res=>{
-        axios.get(`http://localhost:3000/invoice/master/${this.masterId}`).then(res=>{
-          this.internalInvoiceBody={...res.data}
-        })
-      })
+      const body = { [tipoModifica]: nuovoValore };
+      axios
+        .put(
+          `http://localhost:3000/invoice/order/${idOrder}/article/${idArticle}`,
+          {
+            ...body
+          }
+        )
+        .then(res => {
+          axios
+            .get(`http://localhost:3000/invoice/master/${this.masterId}`)
+            .then(res => {
+              this.internalInvoiceBody = { ...res.data };
+            });
+        });
     }
   },
-  created(){
-    this.internalInvoiceBody={...this.invoiceBody}
+  created() {
+    this.internalInvoiceBody = { ...this.invoiceBody };
   }
 };
 </script>
