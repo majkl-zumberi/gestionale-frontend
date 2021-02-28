@@ -2,6 +2,7 @@ import AddArticleModal from "./AddArticleModal";
 import CategoryModal from "./CategoryModal";
 import CustomerModal from "./CustomerModal";
 import DeleteModal from "./DeleteModal";
+import InvoiceMasterModal from "./InvoiceMasterModal";
 import MeasureModal from "./MeasureModal";
 import OrderModal from "./OrderModal";
 export default{
@@ -10,5 +11,6 @@ export default{
   MeasureModal,
   CategoryModal,
   CustomerModal,
-  OrderModal
+  OrderModal,
+  InvoiceMasterModal
 }
