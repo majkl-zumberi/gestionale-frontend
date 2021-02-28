@@ -225,7 +225,7 @@ export default {
       const { data } = await axios.get(
         `http://localhost:3000/invoice-master/${invoiceMaster.id}`
       );
-
+      this.hide();
       Notify.create("Fattura aggiunta!");
       eventBus.$emit("items-changed", data);
     }
