@@ -194,7 +194,7 @@ export default {
           label: "Desc. Articolo",
           type: "string",
           align: "center",
-          editable: true,
+          editable: false,
           sortable: true,
           field: order => order.article.name
         },
