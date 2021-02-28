@@ -20,7 +20,9 @@
                 class="q-mr-sm"
                 size="md"
                 color="white"
-                @click="() => openNewArticleModal(undefined, `Order`, 'add')"
+                @click="
+                  () => openNewArticleModal(undefined, `InvoiceMaster`, 'add')
+                "
               />
               <q-btn color="white" stretch flat label="nuova fattura" />
             </q-toolbar-title>
@@ -56,17 +58,6 @@
                 size="sm"
                 round
                 dense
-                color="primary"
-                icon="edit"
-                @click.stop="
-                  () => openNewArticleModal(props.row.id, 'Order', 'edit')
-                "
-                class="q-mr-xs"
-              />
-              <q-btn
-                size="sm"
-                round
-                dense
                 color="accent"
                 icon="search"
                 @click="openDetailOrder(props.row)"
@@ -82,7 +73,7 @@
                   () =>
                     openNewArticleModal(
                       props.row.id,
-                      'order',
+                      'invoice-master',
                       'delete',
                       props.row,
                       props.row.name
@@ -175,7 +166,7 @@ export default {
             component: DetailInvoice,
             invoiceBody: res.data,
             tailInvoice: invoiceTail,
-            masterId:detailRow.id,
+            masterId: detailRow.id,
             customer: detailRow.customer,
             parent: this
           });
