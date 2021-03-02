@@ -71,6 +71,7 @@
                   {{ tdVal.value }}
                   <q-popup-edit
                     :title="'Aggiorna ' + tdVal.label"
+                    :value="props.row[tdVal.name]"
                     v-if="isColumnEditable(tdVal.name)"
                   >
                     <q-input
@@ -81,12 +82,20 @@
                       counter
                       @change="
                         e =>
-                          updateBodyInvoiceRecordVal(
-                            props.row.order.id,
-                            props.row.article.id,
-                            props.row[tdVal.name],
-                            tdVal.name
-                          )
+                          tdVal.name === 'valueDiscount'
+                            ? calculateDiscount(
+                                props.row['total'],
+                                props.row.order.id,
+                                props.row.article.id,
+                                props.row[tdVal.name],
+                                tdVal.name
+                              )
+                            : updateBodyInvoiceRecordVal(
+                                props.row.order.id,
+                                props.row.article.id,
+                                props.row[tdVal.name],
+                                tdVal.name
+                              )
                       "
                     />
                   </q-popup-edit>
@@ -237,13 +246,13 @@ export default {
         },
         {
           name: "valueDiscount",
-          label: "Valore sconto",
+          label: "Valore sconto(€)",
           type: "number",
           align: "center",
-          editable: false,
+          editable: true,
           sortable: true,
           field: order => order.valueDiscount,
-          format: discount => `${discount.toFixed(2)}€`
+          format: discount => parseInt(discount).toFixed(2)
         },
         {
           name: "note",
@@ -324,6 +333,11 @@ export default {
               this.internalInvoiceBody = { ...res.data };
             });
         });
+    },
+    calculateDiscount(total, idOrder, idArticle, nuovoValore, tipoModifica) {
+      console.log("entro in calcolo sconto");
+      const discount = (nuovoValore / total) * 100;
+      this.updateBodyInvoiceRecordVal(idOrder, idArticle, discount, "discount");
     }
   },
   created() {
