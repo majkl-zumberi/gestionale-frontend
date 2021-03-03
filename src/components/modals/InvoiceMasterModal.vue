@@ -17,7 +17,7 @@
           <div class="row q-col-gutter-md q-mb-lg">
             <div class="col">
               <q-select
-                label="ordine"
+                label="Ordine"
                 v-model="invoice.orderId"
                 :options="orderOptions"
                 outlined
@@ -28,7 +28,7 @@
                 map-options
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="category" />
+                  <q-icon class="icon-margin" name="unarchive" />
                 </template>
               </q-select>
             </div>
@@ -76,7 +76,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="import_contacts" />
+                  <q-icon class="icon-margin" name="place" />
                 </template>
               </q-input>
             </div>
@@ -90,7 +90,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="place" />
+                  <q-icon class="icon-margin" name="flag" />
                 </template>
               </q-input>
             </div>
@@ -107,14 +107,14 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="vpn_key" />
+                  <q-icon class="icon-margin" name="monitor_weight" />
                 </template>
               </q-input>
             </div>
             <div class="col">
               <q-input
                 type="date"
-                hint="data trasporto"
+                hint="Data Trasporto"
                 v-model="invoice.deliveryData"
                 outlined
                 dense
@@ -122,7 +122,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="work" />
+                  <q-icon class="icon-margin" name="today" />
                 </template>
               </q-input>
             </div>
@@ -130,7 +130,7 @@
           <div class="row q-col-gutter-md q-mb-lg">
             <div class="col">
               <q-input
-                label="Metodo pagamento"
+                label="Metodo Pagamento"
                 v-model="invoice.paymentMethod"
                 outlined
                 dense
@@ -138,14 +138,14 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="vpn_key" />
+                  <q-icon class="icon-margin" name="payments" />
                 </template>
               </q-input>
             </div>
             <div class="col">
               <q-input
                 type="number"
-                label="Costo spedizione"
+                label="Costo Spedizione"
                 v-model="invoice.deliveryPrice"
                 outlined
                 dense
@@ -153,7 +153,7 @@
                 clear-icon="close"
               >
                 <template v-slot:prepend>
-                  <q-icon class="icon-margin" name="work" />
+                  <q-icon class="icon-margin" name="local_shipping" />
                 </template>
               </q-input>
             </div>

@@ -191,7 +191,7 @@ export default {
       detailColumns: [
         {
           name: "id",
-          label: "id",
+          label: "Id",
           type: "string",
           align: "center",
           editable: false,
@@ -265,7 +265,7 @@ export default {
         },
         {
           name: "total",
-          label: "totale",
+          label: "Imposta", // totale
           type: "string",
           align: "center",
           editable: false,
@@ -275,7 +275,7 @@ export default {
         },
         {
           name: "totalDiscount",
-          label: "tot scontato -iva",
+          label: "Imposta Scontata", //tot scontato -iva
           type: "string",
           align: "center",
           editable: false,
@@ -285,7 +285,7 @@ export default {
         },
         {
           name: "totalIva",
-          label: "Totale scontato +iva",
+          label: "Imponibile", //Totale scontato +iva
           type: "string",
           align: "center",
           editable: false,
@@ -295,7 +295,7 @@ export default {
         },
         {
           name: "valueIva",
-          label: "val iva",
+          label: "Valore IVA",
           type: "string",
           align: "center",
           editable: false,

@@ -115,7 +115,7 @@
               </q-item-section>
 
               <q-item-section>
-                <q-item-label lines="1" overline>Peso articoli</q-item-label>
+                <q-item-label lines="1" overline>Peso Articoli</q-item-label>
                 <q-item-label caption
                   >{{ invoiceTail.deliveryWeight }}KG</q-item-label
                 >
@@ -186,7 +186,7 @@
 
               <q-item-section>
                 <q-item-label lines="1" overline
-                  >Importo totale Articoli</q-item-label
+                  >Imposta Totale Articoli</q-item-label
                 >
                 <q-item-label caption
                   >{{ totals.totalOrderPrice.toFixed(2) }}€</q-item-label
@@ -201,7 +201,7 @@
 
               <q-item-section>
                 <q-item-label lines="1" overline
-                  >Importo totale scontato</q-item-label
+                  >Imposta Totale Scontato</q-item-label
                 >
                 <q-item-label caption
                   >{{
@@ -222,7 +222,7 @@
 
               <q-item-section>
                 <q-item-label lines="1" overline
-                  >Valore totale sconto</q-item-label
+                  >Valore Totale Sconto</q-item-label
                 >
                 <q-item-label caption
                   >{{
@@ -242,7 +242,7 @@
 
               <q-item-section>
                 <q-item-label lines="1" overline
-                  >Importo totale scontato + IVA</q-item-label
+                  >Imponibile Totale</q-item-label
                 >
                 <q-item-label caption
                   >{{
