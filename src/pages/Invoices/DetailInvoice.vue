@@ -186,7 +186,9 @@ export default {
         "total",
         "totalDiscount",
         "totalIva",
-        "valueIva"
+        "valueIva",
+        "netPrice",
+        "rowTotal"
       ],
       detailColumns: [
         {
@@ -218,7 +220,7 @@ export default {
         },
         {
           name: "price",
-          label: "Prezzo",
+          label: "Valore Unitario",
           type: "number",
           align: "center",
           editable: false,
@@ -226,15 +228,7 @@ export default {
           field: order => order.article.price,
           format: price => `${price}€`
         },
-        {
-          name: "iva",
-          label: "IVA(%)",
-          type: "number",
-          align: "center",
-          editable: true,
-          sortable: true,
-          field: order => order.iva
-        },
+
         {
           name: "discount",
           label: "Sconto(%)",
@@ -246,13 +240,23 @@ export default {
         },
         {
           name: "valueDiscount",
-          label: "Valore sconto(€)",
+          label: "Importo sconto(€)",
           type: "number",
           align: "center",
           editable: true,
           sortable: true,
           field: order => order.valueDiscount,
           format: discount => parseInt(discount).toFixed(2)
+        },
+        {
+          name: "netPrice",
+          label: "Prezzo Netto", // Valore unitario - sconto
+          type: "number",
+          align: "center",
+          editable: false,
+          sortable: true,
+          field: order => order.netPrice,
+          format: price => `${price.toFixed(2)}`
         },
         {
           name: "note",
@@ -264,18 +268,8 @@ export default {
           field: order => order.note
         },
         {
-          name: "total",
-          label: "Imposta", // totale
-          type: "string",
-          align: "center",
-          editable: false,
-          sortable: true,
-          field: order => order.total,
-          format: price => `${price.toFixed(2)}€`
-        },
-        {
           name: "totalDiscount",
-          label: "Imposta Scontata", //tot scontato -iva
+          label: "Imponibile", //tot scontato -iva
           type: "string",
           align: "center",
           editable: false,
@@ -284,8 +278,27 @@ export default {
           format: price => `${price.toFixed(2)}€`
         },
         {
+          name: "iva",
+          label: "IVA(%)",
+          type: "number",
+          align: "center",
+          editable: true,
+          sortable: true,
+          field: order => order.iva
+        },
+        {
+          name: "valueIva",
+          label: "Importo IVA",
+          type: "string",
+          align: "center",
+          editable: false,
+          sortable: true,
+          field: order => order.valueIva,
+          format: price => `${price.toFixed(2)}€`
+        },
+        {
           name: "totalIva",
-          label: "Imponibile", //Totale scontato +iva
+          label: "Imposta", //Totale scontato +iva
           type: "string",
           align: "center",
           editable: false,
@@ -294,15 +307,16 @@ export default {
           format: price => `${price}€`
         },
         {
-          name: "valueIva",
-          label: "Valore IVA",
-          type: "string",
+          name: "rowTotal",
+          label: "Totale Riga", //Totale scontato +iva
+          type: "number",
           align: "center",
           editable: false,
           sortable: true,
-          field: order => order.valueIva,
-          format: price => `${price.toFixed(2)}€`
-        }
+          field: order => order.rowTotal,
+          format: price => `${price}€`
+        },
+
       ]
     };
   },
