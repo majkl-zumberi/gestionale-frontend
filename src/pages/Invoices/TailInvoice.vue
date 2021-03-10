@@ -252,7 +252,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .my-card {
   width: 28%;
 }
