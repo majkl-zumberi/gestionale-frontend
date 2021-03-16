@@ -232,6 +232,50 @@
             >
           </q-item-section>
         </q-item>
+         <q-item clickable v-ripple>
+          <q-item-section avatar top>
+            <q-avatar
+              icon="savings"
+              color="deep-purple-10"
+              text-color="white"
+            />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label lines="1" overline>Ulteriore sconto (coda %)</q-item-label>
+            <q-item-label caption
+              >{{ invoiceTail.tailDiscount }}%
+              <q-popup-edit v-model="invoiceTail.tailDiscount" :cover="false" :offset="[0, 10]">
+                <q-input
+                  v-model="invoiceTail.tailDiscount"
+                  type="number"
+                 dense autofocus counter
+                  @change="e =>updateTailDiscount()">
+                  <template v-slot:prepend>
+                    <q-icon name="savings"  />
+                  </template>
+                </q-input>
+              </q-popup-edit>
+        </q-item-label>
+
+          </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple>
+          <q-item-section avatar top>
+            <q-avatar
+              icon="point_of_sale"
+              color="deep-purple-10"
+              text-color="white"
+            />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label lines="1" overline>Valore sconto (coda)</q-item-label>
+            <q-item-label caption
+              >{{ invoiceTail.tailDiscountValue.toFixed(2) }}&euro;</q-item-label
+            >
+          </q-item-section>
+        </q-item>
       </q-card-section>
     </q-card>
   </div>
@@ -239,6 +283,7 @@
 
 <script>
 import { date, format } from "quasar";
+import eventBus from "../../utils/eventBus";
 export default {
   name: "tailInvoice",
   props: ["invoiceTail", "customer", "totals"],
@@ -248,6 +293,13 @@ export default {
   computed: {
     formatDate() {
       return date.formatDate(this.invoiceTail.deliveryData, "DD-MM-YYYY");
+    }
+  },
+  methods:{
+    updateTailDiscount(){
+      console.log("pronto a salvare il nuovo valore")
+      console.log(this.invoiceTail.tailDiscount)
+      eventBus.$emit("tailInvoice-changed", {id:this.invoiceTail.id,tailDiscount:this.invoiceTail.tailDiscount});
     }
   }
 };
