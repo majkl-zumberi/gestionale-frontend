@@ -188,7 +188,7 @@
               <q-tab-panel name="tailInvoice">
                 <div class="text-h4 q-mb-md">tail invoice</div>
                 <TailInvoice
-                  :invoiceTail="tailInvoice"
+                  :invoiceTail="internalInvoiceTail"
                   :customer="customer"
                   :totals="internalInvoiceBody"
                 />
@@ -204,6 +204,7 @@
 <script>
 import axios from "axios";
 import TailInvoice from "./TailInvoice";
+import eventBus from "../../utils/eventBus";
 import { exportFile } from "quasar";
 
 function wrapCsvValue(val, formatFn) {
@@ -234,6 +235,7 @@ export default {
       dialog: true,
       maximizedToggle: true,
       internalInvoiceBody: {},
+      internalInvoiceTail: {},
       visibleColumns: [
         "id",
         "name",
@@ -442,10 +444,24 @@ export default {
           icon: "warning"
         });
       }
+    },
+    async getTailInvoice({id,tailDiscount}){
+      await axios.put(`http://localhost:3000/invoice-tail/${id}`,{
+        tailDiscount:tailDiscount
+      });
+
+      const {data}=await axios.get(`http://localhost:3000/invoice-tail/master/${this.masterId}`);
+      this.internalInvoiceTail=data;
     }
   },
   created() {
     this.internalInvoiceBody = { ...this.invoiceBody };
+    this.internalInvoiceTail = { ...this.tailInvoice };
+
+    eventBus.$on("tailInvoice-changed", this.getTailInvoice);
+  },
+  beforeDestroy: function() {
+    eventBus.$off("tailInvoice-changed");
   }
 };
 </script>
