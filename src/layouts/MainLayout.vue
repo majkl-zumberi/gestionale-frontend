@@ -27,7 +27,7 @@
     >
       <q-list>
         <q-item-label header class="text-grey-8">
-          Dashboard
+
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -47,6 +47,12 @@
 import EssentialLink from "components/EssentialLink.vue";
 
 const linksData = [
+  {
+    title: "Dashboard",
+    caption: "Gestione Andamento",
+    icon: "dashboard",
+    link: "/#/dashboard"
+  },
   {
     title: "Articoli",
     caption: "Gestione Articoli",

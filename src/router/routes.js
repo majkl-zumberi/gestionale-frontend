@@ -11,6 +11,7 @@ const routes = [
       { path: 'customers', component: () => import('pages/Customers/CustomersList.vue') },
       { path: 'orders', component: () => import('pages/Orders/OrdersList.vue') },
       { path: 'invoices', component: () => import('pages/Invoices/InvoicesList.vue') },
+      { path: 'dashboard', component: () => import('pages/Dashboard/Dashboard.vue') },
     ]
   },
 
