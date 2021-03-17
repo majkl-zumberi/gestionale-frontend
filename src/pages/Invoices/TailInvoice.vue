@@ -157,7 +157,7 @@
 
           <q-item-section>
             <q-item-label lines="1" overline
-              >Imposta Totale Articoli</q-item-label
+              >Imponibile Totale Articoli</q-item-label
             >
             <q-item-label caption
               >{{ totals.totalOrderPrice.toFixed(2) }}€</q-item-label
@@ -172,7 +172,7 @@
 
           <q-item-section>
             <q-item-label lines="1" overline
-              >Imposta Totale Scontato</q-item-label
+              >Imponibile Totale Scontato</q-item-label
             >
             <q-item-label caption
               >{{
@@ -200,22 +200,7 @@
             >
           </q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section avatar top>
-            <q-avatar
-              icon="price_check"
-              color="light-green-9"
-              text-color="white"
-            />
-          </q-item-section>
 
-          <q-item-section>
-            <q-item-label lines="1" overline>Imponibile Totale</q-item-label>
-            <q-item-label caption
-              >{{ totals.totalOrderPriceIva.toFixed(2) }}&euro;</q-item-label
-            >
-          </q-item-section>
-        </q-item>
         <q-item clickable v-ripple>
           <q-item-section avatar top>
             <q-avatar
@@ -273,6 +258,22 @@
             <q-item-label lines="1" overline>Importo Sconto Di Coda (€)</q-item-label>
             <q-item-label caption
               >{{ invoiceTail.tailDiscountValue.toFixed(2) }}&euro;</q-item-label
+            >
+          </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple>
+          <q-item-section avatar top>
+            <q-avatar
+              icon="price_check"
+              color="light-green-9"
+              text-color="white"
+            />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label lines="1" overline>Imposta Totale</q-item-label>
+            <q-item-label caption
+              >{{ totals.totalOrderPriceIva.toFixed(2) }}&euro;</q-item-label
             >
           </q-item-section>
         </q-item>
