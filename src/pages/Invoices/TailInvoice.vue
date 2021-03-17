@@ -242,7 +242,7 @@
           </q-item-section>
 
           <q-item-section>
-            <q-item-label lines="1" overline>Ulteriore sconto (coda %)</q-item-label>
+            <q-item-label lines="1" overline>Sconto Di Coda (%)</q-item-label>
             <q-item-label caption
               >{{ invoiceTail.tailDiscount }}%
               <q-popup-edit v-model="invoiceTail.tailDiscount" :cover="false" :offset="[0, 10]">
@@ -270,7 +270,7 @@
           </q-item-section>
 
           <q-item-section>
-            <q-item-label lines="1" overline>Valore sconto (coda)</q-item-label>
+            <q-item-label lines="1" overline>Importo Sconto Di Coda (€)</q-item-label>
             <q-item-label caption
               >{{ invoiceTail.tailDiscountValue.toFixed(2) }}&euro;</q-item-label
             >
